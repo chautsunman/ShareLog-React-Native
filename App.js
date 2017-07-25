@@ -1,18 +1,22 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import AppReducers from './reducers';
+import AppComponent from './components/App';
 
 import * as firebase from 'firebase';
 
 export default class App extends React.Component {
-  constructor(props) {
-    super(props);
+  store = createStore(
+    AppReducers,
+    applyMiddleware(
+      thunkMiddleware
+    )
+  );
 
-    this.state = {
-      user: null
-    };
-  }
-
-   componentDidMount() {
+  componentDidMount() {
     // Initialize Firebase
     var config = {
       apiKey: "AIzaSyAELXBVivbvZeNMXbh9qnX9T3fxjJSg1VA",
@@ -23,57 +27,28 @@ export default class App extends React.Component {
       messagingSenderId: "161699951866"
     };
     firebase.initializeApp(config);
-
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({user : user});
-      } else {
-        this.setState({user: null});
-      }
-    });
-  }
-
-   signInAnonymously() {
-    firebase.auth().signInAnonymously()
-        .catch((error) => {
-          console.log('signInAnonymously error', error);
-        });
-  }
-
-  signOut() {
-    firebase.auth().signOut()
-        .catch((error) => {
-          console.log('signOut error', error);
-        });
   }
 
   render() {
     return (
-      <View style={styles.container}>
-        {/* <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text> */}
+      <Provider store={this.store}>
+        <AppComponent />
 
-         <Text>{this.state.user ? this.state.user.uid : ''}</Text>
-
-        <Button
-          title='Sign In Anonymously'
-          onPress={this.signInAnonymously}
-        />
-        <Button
-          title='Sign Out'
-          onPress={this.signOut}
-        />
-      </View>
+        {/* <View style={styles.container}>
+          <Text>Open up App.js to start working on your app!</Text>
+          <Text>Changes you make will automatically reload.</Text>
+          <Text>Shake your phone to open the developer menu.</Text>
+        </View> */}
+      </Provider>
     );
   }
 }
 
-const styles = StyleSheet.create({
+/* const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+}); */
