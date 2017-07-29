@@ -1,10 +1,14 @@
 import React from 'react';
-import {View, Text, Button} from 'react-native';
+import {View, FlatList, Text, Button} from 'react-native';
 
 export default class Home extends React.Component {
   static navigationOptions = {
     title: 'Home'
   };
+
+  componentDidMount() {
+    this.props.getLogs();
+  }
 
   render() {
     return (
@@ -14,6 +18,11 @@ export default class Home extends React.Component {
         <Button
           title='Sign Out'
           onPress={this.props.signOut}
+        />
+
+        <FlatList
+          data={this.props.logs}
+          renderItem={({item}) => <Text>{item.title}</Text>}
         />
       </View>
     );
