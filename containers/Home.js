@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 
-import AuthComponent from '../components/Auth';
-import {signInAnonymously} from '../actions/Auth';
+import HomeComponent from '../components/Home';
+import {signOut} from '../actions/Auth';
 
 const mapStateToProps = (state) => {
   return {
@@ -13,15 +13,15 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    signInAnonymously: () => {
-      dispatch(signInAnonymously());
+    signOut: () => {
+      dispatch(signOut());
     }
   }
 }
 
-const Auth = connect(
+const Home = connect(
   mapStateToProps,
   mapDispatchToProps
-)(AuthComponent);
+)(HomeComponent);
 
-export default Auth;
+export default Home;

@@ -1,13 +1,19 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
+import {connect} from 'react-redux';
 
 import Auth from '../containers/Auth';
+import Navigation from '../containers/Navigation';
 
-export default class App extends React.Component {
+class App extends React.Component {
   render() {
+    if (!this.props.signedIn) {
+      return <Auth />;
+    }
+
     return (
-      <View style={styles.container} >
-        <Auth />
+      <View style={styles.container}>
+        <Navigation />
       </View>
     );
   }
@@ -16,8 +22,16 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // backgroundColor: '#fff',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
 });
+
+const mapStateToProps = (state) => {
+  return {
+    signedIn: state.auth.signedIn
+  }
+};
+
+export default connect(mapStateToProps)(App);

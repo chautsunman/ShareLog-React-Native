@@ -1,30 +1,30 @@
 import React from 'react';
-import {View, Text, Button} from 'react-native';
+import {View, Button, StyleSheet} from 'react-native';
+
+import * as firebase from 'firebase';
 
 export default class Auth extends React.Component {
+  componentDidMount() {
+    // TODO: signed in already
+  }
+
   render() {
     return (
-      <View>
-        {this.props.authStateChanging &&
-          <Text>auth state changing</Text>
-        }
-
-        {this.props.signedIn &&
-          <Text>{this.props.user.uid}</Text>
-        }
-
-        {!this.props.signedIn ? (
-          <Button
-            title='Sign In Anonymously'
-            onPress={this.props.signInAnonymously}
-          />
-        ) : (
-          <Button
-            title='Sign Out'
-            onPress={this.props.signOut}
-          />
-        )}
+      <View style={styles.container}>
+        <Button
+          title='Sign In Anonymously'
+          onPress={this.props.signInAnonymously}
+        />
       </View>
     );
   }
-}
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
