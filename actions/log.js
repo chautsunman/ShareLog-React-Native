@@ -17,7 +17,7 @@ export function getLogs() {
           }
 
           for (let logId in logsObject) {
-            logsArray.push(logsObject[logId]);
+            logsArray.push({...logsObject[logId], id: logId});
           }
 
           dispatch({
@@ -50,7 +50,12 @@ export function getLogs() {
 
 export function saveLog(log) {
   return function(dispatch, getState) {
-    let ref = firebase.database().ref('/log/' + getState().auth.user.uid).push();
+    let ref = firebase.database().ref('/log/' + getState().auth.user.uid);
+    if (log.id) {
+      ref = ref.child(log.id);
+    } else {
+      ref = ref.push();
+    }
 
     return ref.set(log)
         .catch((error) => {

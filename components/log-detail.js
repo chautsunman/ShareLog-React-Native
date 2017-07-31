@@ -10,9 +10,7 @@ export default class LogDetail extends React.Component {
     super(props);
 
     this.state = {
-      log: {
-        title: ''
-      }
+      log: this.props.navigation.state.params ? this.props.navigation.state.params.log : {id: null, title: ''}
     };
   }
 

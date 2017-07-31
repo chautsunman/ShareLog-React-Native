@@ -22,7 +22,11 @@ export default class Home extends React.Component {
 
         <FlatList
           data={this.props.logs}
-          renderItem={({item}) => <Text>{item.title}</Text>}
+          renderItem={({item}) =>
+            <Text onPress={() => {this.props.navigation.navigate('LogDetail', {log: item});}}>
+              {item.title}
+            </Text>
+          }
         />
 
         <Button
