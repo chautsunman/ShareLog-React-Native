@@ -4,9 +4,11 @@ import {StackNavigator, addNavigationHelpers} from 'react-navigation';
 
 import Auth from '../containers/Auth';
 import Home from '../containers/Home';
+import LogDetail from '../containers/log-detail';
 
 export const AppNavigator = StackNavigator({
-  Home: {screen: Home}
+  Home: {screen: Home},
+  LogDetail: {screen: LogDetail}
 });
 
 export default class Navigation extends React.Component {

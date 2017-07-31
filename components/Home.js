@@ -24,6 +24,11 @@ export default class Home extends React.Component {
           data={this.props.logs}
           renderItem={({item}) => <Text>{item.title}</Text>}
         />
+
+        <Button
+          title="Add log"
+          onPress={() => {this.props.navigation.navigate('LogDetail');}}
+        />
       </View>
     );
   }

@@ -47,3 +47,14 @@ export function getLogs() {
         }); */
   };
 }
+
+export function saveLog(log) {
+  return function(dispatch, getState) {
+    let ref = firebase.database().ref('/log/' + getState().auth.user.uid).push();
+
+    return ref.set(log)
+        .catch((error) => {
+          console.log('saveLog error', error);
+        });
+  };
+}
