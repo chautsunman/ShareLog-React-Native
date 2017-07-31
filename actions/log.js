@@ -1,6 +1,7 @@
 import * as firebase from 'firebase';
 
 export const GET_LOG = 'GET_LOG';
+export const RESET_LOG_STATE = 'RESET_LOG_STATE';
 
 export function getLogs() {
   return function(dispatch, getState) {
@@ -61,5 +62,11 @@ export function saveLog(log) {
         .catch((error) => {
           console.log('saveLog error', error);
         });
+  };
+}
+
+export function resetLogState() {
+  return {
+    type: RESET_LOG_STATE
   };
 }

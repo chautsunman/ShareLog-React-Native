@@ -5,8 +5,6 @@ import {signInAnonymously} from '../actions/Auth';
 
 const mapStateToProps = (state) => {
   return {
-    signedIn: state.auth.signedIn,
-    user: state.auth.user,
     authStateChanging: state.auth.authStateChanging
   };
 }

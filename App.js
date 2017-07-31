@@ -16,7 +16,7 @@ export default class App extends React.Component {
     )
   );
 
-  componentDidMount() {
+  componentWillMount() {
     // Initialize Firebase
     var config = {
       apiKey: "AIzaSyAELXBVivbvZeNMXbh9qnX9T3fxjJSg1VA",

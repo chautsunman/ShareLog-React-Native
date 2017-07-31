@@ -1,4 +1,4 @@
-import {GET_LOG} from '../actions/log';
+import {GET_LOG, RESET_LOG_STATE} from '../actions/log';
 
 const initialState = {
   logs: []
@@ -9,7 +9,9 @@ const Log = (state = initialState, action) => {
     case GET_LOG:
       return {
         logs: action.logs
-      }
+      };
+    case RESET_LOG_STATE:
+      return initialState;
     default:
       return state;
   }
